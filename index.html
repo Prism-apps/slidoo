@@ -16,7 +16,10 @@
       --line: rgba(11,43,34,.12);
       --shadow: 0 18px 50px rgba(0,0,0,.18);
       --radius: 18px;
-      --max: 980px; /* 1列にするので少し絞ると見栄え良い */
+      --max: 980px;
+
+      /* ★ 全体の文字サイズを上げる基準 */
+      --base: 17px;
     }
 
     *{ box-sizing:border-box; }
@@ -26,6 +29,7 @@
                    Arial, "Noto Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif;
       color: var(--text);
       background: var(--bg);
+      font-size: var(--base);
     }
 
     a{ color: inherit; }
@@ -45,6 +49,7 @@
     .brand{
       display:flex; gap:10px; align-items:center;
       font-weight: 900; letter-spacing: .5px;
+      font-size: 16px;
     }
     .logo-dot{
       width: 12px; height: 12px; border-radius: 999px;
@@ -53,13 +58,14 @@
     }
     .nav{
       display:flex; gap: 8px; align-items:center;
-      font-size: 13px; color: var(--muted);
+      font-size: 14px;
+      color: var(--muted);
       flex-wrap: wrap;
       justify-content: flex-end;
     }
     .nav a{
       text-decoration:none;
-      padding: 8px 10px;
+      padding: 9px 12px;
       border-radius: 999px;
       border: 1px solid rgba(11,43,34,.10);
       background: rgba(255,255,255,.45);
@@ -85,10 +91,10 @@
 
     /* ヒーロー下段：左テキスト + 右スクショ（スマホ枠） */
     .hero-body{
-      padding: 18px 18px 22px;
+      padding: 20px 20px 24px;
       display:grid;
       grid-template-columns: 1.15fr .85fr;
-      gap: 16px;
+      gap: 18px;
       align-items:center;
     }
     @media (max-width: 860px){
@@ -96,18 +102,18 @@
     }
 
     h1{
-      margin: 6px 0 10px;
-      font-size: 36px;
-      line-height: 1.18;
+      margin: 6px 0 12px;
+      font-size: 40px; /* ★大きく */
+      line-height: 1.15;
       letter-spacing: -0.02em;
     }
-    @media (max-width: 500px){ h1{ font-size: 28px; } }
+    @media (max-width: 500px){ h1{ font-size: 32px; } }
 
     .lead{
-      margin: 0 0 14px;
+      margin: 0 0 16px;
       color: var(--muted);
-      font-size: 15px;
-      line-height: 1.85;
+      font-size: 17px; /* ★大きく */
+      line-height: 1.9;
     }
 
     .cta-row{
@@ -117,7 +123,7 @@
     .btn{
       display:inline-flex; align-items:center; justify-content:center;
       gap: 10px;
-      padding: 12px 16px;
+      padding: 13px 18px;
       border-radius: 999px;
       border: 1px solid rgba(11,43,34,.14);
       background: rgba(255,255,255,.70);
@@ -125,7 +131,7 @@
       color: var(--text);
       transition: transform .12s ease, background .12s ease, border-color .12s ease;
       font-weight: 900;
-      font-size: 14px;
+      font-size: 15px; /* ★大きく */
       cursor:pointer;
     }
     .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.85); }
@@ -137,7 +143,7 @@
 
     /* 右：スマホ枠 */
     .phone{
-      width: min(320px, 100%);
+      width: min(330px, 100%);
       margin-left: auto;
       margin-right: 6px;
       border-radius: 34px;
@@ -177,39 +183,38 @@
     }
     .placeholder{
       color: rgba(11,43,34,.55);
-      font-size: 12px;
+      font-size: 13px; /* ★大きく */
       text-align:center;
       padding: 10px;
       line-height: 1.6;
     }
 
     /* sections */
-    section{ padding: 40px 0; }
+    section{ padding: 44px 0; }
     .section-title{
       display:flex; align-items:baseline; gap: 12px;
-      margin: 0 0 18px;
+      margin: 0 0 20px;
     }
     .section-title h2{
       margin:0;
-      font-size: 26px;
+      font-size: 30px; /* ★大きく */
       letter-spacing: .04em;
     }
     .section-title span{
-      font-size: 12px;
+      font-size: 13px; /* ★少し大きく */
       color: rgba(11,43,34,.62);
       letter-spacing: .18em;
     }
 
-    /* ====== ここが「1行に1つ」化の本体 ====== */
+    /* ====== 1行に1つ ====== */
     .grid3{
       display:grid;
-      grid-template-columns: 1fr; /* ← 常に1列 */
+      grid-template-columns: 1fr;
       gap: 18px;
     }
-
     .steps{
       display:grid;
-      grid-template-columns: 1fr; /* ← 常に1列 */
+      grid-template-columns: 1fr;
       gap: 18px;
     }
 
@@ -218,11 +223,11 @@
       border-radius: var(--radius);
       border: 1px solid rgba(11,43,34,.12);
       background: var(--panel);
-      padding: 26px; /* 大きく */
+      padding: 28px; /* ★少し増やす */
       box-shadow: 0 10px 25px rgba(0,0,0,.08);
       display:flex;
       gap: 18px;
-      align-items:center; /* 画像を大きくしたので中央揃え */
+      align-items:center;
     }
 
     /* step（遊び方） */
@@ -230,18 +235,18 @@
       border-radius: var(--radius);
       border: 1px solid rgba(11,43,34,.12);
       background: var(--panel2);
-      padding: 26px; /* 大きく */
+      padding: 28px; /* ★少し増やす */
       box-shadow: 0 10px 25px rgba(0,0,0,.06);
       display:flex;
       gap: 18px;
       align-items:center;
     }
 
-    /* 正方形サムネ（大きく） */
+    /* 正方形サムネ（大きいまま） */
     .sq{
-      width: 140px;   /* ← 画像大きく */
-      height: 140px;  /* ← 画像大きく */
-      border-radius: 20px;
+      width: 150px;
+      height: 150px;
+      border-radius: 22px;
       border: 1px solid rgba(11,43,34,.12);
       background: rgba(11,43,34,.06);
       overflow:hidden;
@@ -251,8 +256,8 @@
       justify-content:center;
     }
     @media (max-width: 520px){
-      .sq{ width: 110px; height: 110px; } /* スマホだけ少し縮める */
-      .card, .step{ padding: 20px; }
+      .sq{ width: 120px; height: 120px; }
+      .card, .step{ padding: 22px; }
     }
     .sq img{
       width:100%;
@@ -265,41 +270,50 @@
 
     .card h3{
       margin: 0 0 10px;
-      font-size: 20px;
+      font-size: 22px; /* ★大きく */
       line-height: 1.35;
     }
     .card p{
       margin: 0;
       color: var(--muted);
-      line-height: 1.9;
-      font-size: 16px;
+      line-height: 1.95;
+      font-size: 17px; /* ★大きく */
     }
 
     .step b{
       display:inline-block;
       margin-bottom: 10px;
       font-weight: 900;
-      font-size: 18px;
+      font-size: 20px; /* ★大きく */
       line-height: 1.35;
     }
     .step p{
       margin: 0;
       color: var(--muted);
-      line-height: 1.9;
-      font-size: 16px;
+      line-height: 1.95;
+      font-size: 17px; /* ★大きく */
     }
 
     /* FAQ */
-    .faq{ display:grid; gap: 10px; }
+    .faq{ display:grid; gap: 12px; }
     details{
       border-radius: 14px;
       border: 1px solid rgba(11,43,34,.12);
       background: rgba(255,255,255,.85);
-      padding: 12px 14px;
+      padding: 14px 16px;
       box-shadow: 0 8px 18px rgba(0,0,0,.06);
     }
-    summary{ cursor:pointer; font-weight: 900; }
-    details p{ margin: 10px 0 0; color: var(--muted); line-height: 1.85; }
+    summary{
+      cursor:pointer;
+      font-weight: 900;
+      font-size: 18px; /* ★大きく */
+    }
+    details p{
+      margin: 10px 0 0;
+      color: var(--muted);
+      line-height: 1.9;
+      font-size: 16px; /* ★大きく */
+    }
 
     /* contact */
     .contact-grid{
@@ -313,34 +327,41 @@
       border-radius: var(--radius);
       border: 1px solid rgba(11,43,34,.12);
       background: rgba(255,255,255,.92);
-      padding: 16px;
+      padding: 18px;
       box-shadow: 0 10px 25px rgba(0,0,0,.08);
     }
-    .box h3{ margin:0 0 10px; font-size: 15px; }
-    .box p{ margin:0; color: var(--muted); line-height: 1.85; font-size: 14px; }
+    .box h3{
+      margin:0 0 12px;
+      font-size: 18px; /* ★大きく */
+    }
 
     form{ margin-top: 10px; }
-    label{ display:block; font-size: 13px; font-weight: 900; margin: 10px 0 6px; }
+    label{
+      display:block;
+      font-size: 15px; /* ★大きく */
+      font-weight: 900;
+      margin: 12px 0 8px;
+    }
     input, textarea{
       width:100%;
       border-radius: 12px;
       border: 1px solid rgba(11,43,34,.18);
-      padding: 12px 12px;
-      font-size: 14px;
+      padding: 14px 14px; /* ★大きく */
+      font-size: 16px;     /* ★大きく */
       outline: none;
       background: rgba(255,255,255,.95);
     }
-    textarea{ min-height: 120px; resize: vertical; }
+    textarea{ min-height: 140px; resize: vertical; }
     .form-row{ display:grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     @media (max-width: 680px){
       .form-row{ grid-template-columns: 1fr; }
     }
     .form-actions{
       display:flex; gap: 10px; align-items:center; flex-wrap:wrap;
-      margin-top: 12px;
+      margin-top: 14px;
     }
     .note{
-      font-size: 12px;
+      font-size: 13px; /* ★大きく */
       color: rgba(11,43,34,.62);
       line-height: 1.7;
     }
@@ -349,7 +370,7 @@
     footer{
       padding: 22px 0 36px;
       color: rgba(11,43,34,.70);
-      font-size: 12px;
+      font-size: 13px; /* ★大きく */
       text-align:center;
     }
     .footer-links{
@@ -358,11 +379,12 @@
     }
     .footer-links a{
       text-decoration:none;
-      padding: 8px 10px;
+      padding: 9px 12px;
       border-radius: 999px;
       border: 1px solid rgba(11,43,34,.12);
       background: rgba(255,255,255,.60);
       color: rgba(11,43,34,.80);
+      font-size: 13px;
     }
     .footer-links a:hover{ background: rgba(255,255,255,.80); color: var(--text); }
   </style>

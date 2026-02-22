@@ -1,54 +1,575 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SLIDOO Support</title>
-<style>
-body {
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-  background-color: #f5f5f7;
-  margin: 0;
-  padding: 40px 20px;
-}
-.container {
-  max-width: 600px;
-  margin: auto;
-  background: white;
-  padding: 40px;
-  border-radius: 16px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-  text-align: center;
-}
-h1 {
-  margin-bottom: 20px;
-}
-p {
-  line-height: 1.8;
-  color: #333;
-}
-.email {
-  margin-top: 20px;
-  font-weight: bold;
-  font-size: 18px;
-}
-footer {
-  margin-top: 40px;
-  font-size: 12px;
-  color: #888;
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SLIDOO | パズル × ずかん</title>
+  <meta name="description" content="SLIDOOは、スライドパズルで遊びながら、ずかんを集めて学べるカジュアルゲームです。" />
+
+  <style>
+    :root{
+      --bg: #33CC99;            /* 添付画像の背景色に合わせた */
+      --panel: rgba(255,255,255,.92);
+      --panel2: rgba(255,255,255,.85);
+      --text: #0b2b22;
+      --muted: rgba(11,43,34,.72);
+      --line: rgba(11,43,34,.12);
+      --accent: #0b2b22;
+      --accent2:#0ea5e9;
+      --shadow: 0 18px 50px rgba(0,0,0,.18);
+      --radius: 18px;
+      --max: 1040px;
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+                   Arial, "Noto Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif;
+      color: var(--text);
+      background: var(--bg);
+    }
+
+    a{ color: inherit; }
+    .wrap{ max-width: var(--max); margin: 0 auto; padding: 0 18px; }
+
+    /* top bar */
+    .top{
+      position: sticky; top:0; z-index: 20;
+      backdrop-filter: blur(10px);
+      background: rgba(255,255,255,.55);
+      border-bottom: 1px solid var(--line);
+    }
+    .top .wrap{
+      display:flex; align-items:center; justify-content:space-between;
+      padding: 12px 18px;
+    }
+    .brand{
+      display:flex; gap:10px; align-items:center;
+      font-weight: 900; letter-spacing: .5px;
+    }
+    .logo-dot{
+      width: 12px; height: 12px; border-radius: 999px;
+      background: linear-gradient(135deg, #ffb703, #84cc16);
+      box-shadow: 0 0 0 3px rgba(11,43,34,.08);
+    }
+    .nav{
+      display:flex; gap: 8px; align-items:center;
+      font-size: 13px; color: var(--muted);
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .nav a{
+      text-decoration:none;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(11,43,34,.10);
+      background: rgba(255,255,255,.45);
+    }
+    .nav a:hover{ background: rgba(255,255,255,.70); color: var(--text); }
+
+    /* hero */
+    header.hero{ padding: 26px 0 12px; }
+    .hero-card{
+      border-radius: var(--radius);
+      border: 1px solid rgba(11,43,34,.12);
+      background: rgba(255,255,255,.60);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .hero-media{
+      width:100%;
+      display:block;
+      background: rgba(255,255,255,.20);
+    }
+    .hero-body{
+      padding: 18px 18px 20px;
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 16px;
+      align-items:center;
+    }
+    @media (max-width: 860px){
+      .hero-body{ grid-template-columns: 1fr; }
+    }
+
+    .kicker{
+      display:inline-flex; gap:10px; align-items:center;
+      padding: 8px 12px;
+      border: 1px solid rgba(11,43,34,.12);
+      border-radius: 999px;
+      background: rgba(255,255,255,.55);
+      color: var(--muted);
+      font-size: 13px;
+      width: fit-content;
+    }
+    .kicker b{ color: var(--text); }
+
+    h1{
+      margin: 10px 0 10px;
+      font-size: 36px;
+      line-height: 1.18;
+      letter-spacing: -0.02em;
+    }
+    @media (max-width: 500px){ h1{ font-size: 28px; } }
+
+    .lead{
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.85;
+    }
+
+    .cta-row{
+      display:flex; flex-wrap:wrap; gap: 10px; align-items:center;
+      margin-top: 10px;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap: 10px;
+      padding: 12px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(11,43,34,.14);
+      background: rgba(255,255,255,.70);
+      text-decoration:none;
+      color: var(--text);
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      font-weight: 900;
+      font-size: 14px;
+    }
+    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.85); }
+    .btn.primary{
+      border-color: rgba(11,43,34,.22);
+      background: linear-gradient(135deg, rgba(255,183,3,.35), rgba(132,204,22,.28));
+      box-shadow: 0 12px 30px rgba(0,0,0,.12);
+    }
+    .mini{
+      color: rgba(11,43,34,.62);
+      font-size: 12px;
+      line-height: 1.7;
+      margin-top: 10px;
+    }
+
+    .hero-side{
+      border-radius: 16px;
+      border: 1px solid rgba(11,43,34,.12);
+      background: rgba(255,255,255,.55);
+      padding: 14px;
+    }
+    .hero-side h3{
+      margin: 0 0 8px;
+      font-size: 14px;
+      letter-spacing: .04em;
+    }
+    .hero-side ul{
+      margin:0; padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 13px;
+    }
+
+    /* sections */
+    section{ padding: 22px 0; }
+    .section-title{
+      display:flex; align-items:baseline; gap: 12px;
+      margin: 0 0 12px;
+    }
+    .section-title h2{
+      margin:0;
+      font-size: 20px;
+      letter-spacing: .04em;
+    }
+    .section-title span{
+      font-size: 12px;
+      color: rgba(11,43,34,.62);
+      letter-spacing: .18em;
+    }
+
+    .grid3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    @media (max-width: 920px){
+      .grid3{ grid-template-columns: 1fr; }
+    }
+
+    .card{
+      border-radius: var(--radius);
+      border: 1px solid rgba(11,43,34,.12);
+      background: var(--panel);
+      padding: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,.08);
+    }
+    .no{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width: 38px; height: 38px;
+      border-radius: 12px;
+      background: rgba(11,43,34,.06);
+      border: 1px solid rgba(11,43,34,.10);
+      font-weight: 900;
+      margin-bottom: 10px;
+    }
+    .card h3{ margin: 6px 0 8px; font-size: 16px; }
+    .card p{ margin: 0; color: var(--muted); line-height: 1.85; font-size: 14px; }
+
+    .steps{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    @media (max-width: 860px){
+      .steps{ grid-template-columns: 1fr; }
+    }
+
+    .step{
+      border-radius: var(--radius);
+      border: 1px solid rgba(11,43,34,.12);
+      background: var(--panel2);
+      padding: 16px;
+    }
+    .step b{
+      display:inline-block;
+      margin-bottom: 8px;
+      font-weight: 900;
+    }
+    .step p{ margin: 0; color: var(--muted); line-height: 1.85; font-size: 14px; }
+
+    /* FAQ */
+    .faq{
+      display:grid; gap: 10px;
+    }
+    details{
+      border-radius: 14px;
+      border: 1px solid rgba(11,43,34,.12);
+      background: rgba(255,255,255,.85);
+      padding: 12px 14px;
+      box-shadow: 0 8px 18px rgba(0,0,0,.06);
+    }
+    summary{
+      cursor:pointer;
+      font-weight: 900;
+    }
+    details p{ margin: 10px 0 0; color: var(--muted); line-height: 1.85; }
+
+    /* contact */
+    .contact-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      align-items:start;
+    }
+    @media (max-width: 860px){
+      .contact-grid{ grid-template-columns: 1fr; }
+    }
+
+    .box{
+      border-radius: var(--radius);
+      border: 1px solid rgba(11,43,34,.12);
+      background: rgba(255,255,255,.92);
+      padding: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,.08);
+    }
+    .box h3{ margin:0 0 10px; font-size: 15px; }
+    .box p{ margin:0; color: var(--muted); line-height: 1.85; font-size: 14px; }
+
+    form{ margin-top: 10px; }
+    label{ display:block; font-size: 13px; font-weight: 900; margin: 10px 0 6px; }
+    input, textarea{
+      width:100%;
+      border-radius: 12px;
+      border: 1px solid rgba(11,43,34,.18);
+      padding: 12px 12px;
+      font-size: 14px;
+      outline: none;
+      background: rgba(255,255,255,.95);
+    }
+    textarea{ min-height: 120px; resize: vertical; }
+    .form-row{ display:grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    @media (max-width: 680px){
+      .form-row{ grid-template-columns: 1fr; }
+    }
+    .form-actions{
+      display:flex; gap: 10px; align-items:center; flex-wrap:wrap;
+      margin-top: 12px;
+    }
+    .note{
+      font-size: 12px;
+      color: rgba(11,43,34,.62);
+      line-height: 1.7;
+    }
+
+    /* footer */
+    footer{
+      padding: 22px 0 36px;
+      color: rgba(11,43,34,.70);
+      font-size: 12px;
+      text-align:center;
+    }
+    .footer-links{
+      display:flex; gap: 10px; justify-content:center; flex-wrap:wrap;
+      margin-top: 10px;
+    }
+    .footer-links a{
+      text-decoration:none;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(11,43,34,.12);
+      background: rgba(255,255,255,.60);
+      color: rgba(11,43,34,.80);
+    }
+    .footer-links a:hover{ background: rgba(255,255,255,.80); color: var(--text); }
+  </style>
 </head>
+
 <body>
-<div class="container">
-<h1>SLIDOO サポートページ</h1>
-<p>SLIDOOをご利用いただきありがとうございます。</p>
-<p>ご質問・不具合報告は下記メールアドレスまでご連絡ください。</p>
-<p class="email">k71n916@yahoo.co.jp</p>
-<p>通常2〜3営業日以内に返信いたします。</p>
-<footer>
-© 2026 SLIDOO
-</footer>
-</div>
+  <div class="top">
+    <div class="wrap">
+      <div class="brand">
+        <span class="logo-dot" aria-hidden="true"></span>
+        <span>Prism Apps</span>
+      </div>
+      <nav class="nav">
+        <a href="#about">概要</a>
+        <a href="#features">特長</a>
+        <a href="#how">遊び方</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">お問い合わせ</a>
+      </nav>
+    </div>
+  </div>
+
+  <header class="hero">
+    <div class="wrap">
+      <div class="hero-card">
+        <!-- 重要：添付画像をリポジトリに「hero.png」としてアップロードしてください（index.htmlと同じ階層） -->
+        <img class="hero-media" src="hero.png" alt="SLIDOO パズル × ずかん" />
+
+        <div class="hero-body">
+          <div>
+            <div class="kicker"><b>スライドパズル</b> × <b>ずかん</b></div>
+            <h1>遊んで集めて、<br>どんどん楽しくなる。</h1>
+            <p class="lead">
+              SLIDOOは、スライドパズルで遊びながら“ずかん”を集めていくカジュアルゲームです。
+              短時間でも気持ちよく遊べて、クリアの達成感とコレクションのワクワクが続きます。
+            </p>
+
+            <div class="cta-row">
+              <a class="btn primary" href="#how">まずは遊び方を見る</a>
+              <!-- App Store URLが確定したらここに差し替え -->
+              <a class="btn" href="#" onclick="alert('App Store URL が決まったらリンクを設定します'); return false;">App Store</a>
+            </div>
+
+            <p class="mini">
+              ※ 本ページはサービス紹介LPです。末尾にサポート用のお問い合わせフォームがあります。
+            </p>
+          </div>
+
+          <aside class="hero-side" id="about">
+            <h3>SLIDOO でできること</h3>
+            <ul>
+              <li>シンプル操作のスライドパズル</li>
+              <li>クリアで“ずかん”をコレクション</li>
+              <li>スキマ時間にサクッとプレイ</li>
+              <li>課金でコンテンツ拡張（予定/実装に合わせて調整可）</li>
+            </ul>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="features">
+    <div class="wrap">
+      <div class="section-title">
+        <h2>特長</h2><span>FEATURE</span>
+      </div>
+
+      <div class="grid3">
+        <div class="card">
+          <div class="no">01</div>
+          <h3>直感的で気持ちいい操作</h3>
+          <p>ルールはシンプル。ピースを動かして正しい並びにそろえるだけ。誰でもすぐに遊べます。</p>
+        </div>
+
+        <div class="card">
+          <div class="no">02</div>
+          <h3>集める楽しさ（ずかん）</h3>
+          <p>クリアのごほうびでコレクションが増える。遊ぶほどに“見たくなる”体験を目指します。</p>
+        </div>
+
+        <div class="card">
+          <div class="no">03</div>
+          <h3>短時間でも達成感</h3>
+          <p>スキマ時間にサクッと。気づけばもう1回…のテンポ感で、続けやすい設計です。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="wrap">
+      <div class="section-title">
+        <h2>遊び方</h2><span>HOW TO</span>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <b>STEP 1：パズルを選ぶ</b>
+          <p>好きなテーマ・難易度から選んでスタート。まずは気軽に触ってみてください。</p>
+        </div>
+        <div class="step">
+          <b>STEP 2：ピースをスライド</b>
+          <p>空きマスにピースを動かして並べ替え。シンプルだけど奥深いのが魅力です。</p>
+        </div>
+        <div class="step">
+          <b>STEP 3：クリアして達成！</b>
+          <p>完成した瞬間の爽快感。クリア状況に応じた演出やごほうびを用意していきます。</p>
+        </div>
+        <div class="step">
+          <b>STEP 4：ずかんを集める</b>
+          <p>クリアでずかんが増える。コレクションが埋まっていく気持ちよさを楽しめます。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="section-title">
+        <h2>よくある質問</h2><span>FAQ</span>
+      </div>
+
+      <div class="faq">
+        <details>
+          <summary>オフラインで遊べますか？</summary>
+          <p>基本プレイはオフラインでも遊べる想定です（※実装状況に合わせて文言は調整してください）。</p>
+        </details>
+
+        <details>
+          <summary>課金はどのように行われますか？</summary>
+          <p>アプリ内課金はAppleの仕組みを利用して決済されます。購入が反映されない場合は、通信状況の確認→アプリ再起動をお試しください。</p>
+        </details>
+
+        <details>
+          <summary>不具合を見つけたら？</summary>
+          <p>末尾のお問い合わせフォームからご連絡ください。端末/iOS/再現手順/スクショがあると助かります。</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="section-title">
+        <h2>お問い合わせ（サポート）</h2><span>SUPPORT</span>
+      </div>
+
+      <div class="contact-grid">
+        <div class="box">
+          <h3>サポート窓口</h3>
+          <p>
+            ご質問・不具合報告はこちらから。<br>
+            通常 <b>2〜3営業日以内</b> を目安に返信します。
+          </p>
+          <p class="note" style="margin-top:10px;">
+            できれば「端末(iPhone機種)」「iOSバージョン」「発生手順」「スクショ」を添えてください。
+          </p>
+
+          <p class="note" style="margin-top:10px;">
+            送信方法は2つあります：<br>
+            ① このフォームで送信（メールアプリが開きます）<br>
+            ② 直接メール（下のアドレス）
+          </p>
+
+          <!-- ★ここをあなたのメールアドレスに変更してください -->
+          <p style="margin-top:10px; font-weight:900;">support@yourdomain.com</p>
+        </div>
+
+        <div class="box">
+          <h3>お問い合わせフォーム</h3>
+
+          <!--
+            GitHub Pagesはサーバー側処理がないため「フォーム送信」はそのままだと受け取れません。
+            ここでは “メールを起動して送る方式（mailto）” にしています。
+            将来的にFormspree等を使う場合は action を差し替えればOKです。
+          -->
+          <form id="supportForm">
+            <div class="form-row">
+              <div>
+                <label for="name">お名前（任意）</label>
+                <input id="name" name="name" type="text" placeholder="例：なかじま" />
+              </div>
+              <div>
+                <label for="email">返信先メール（任意）</label>
+                <input id="email" name="email" type="email" placeholder="例：example@gmail.com" />
+              </div>
+            </div>
+
+            <label for="subject">件名</label>
+            <input id="subject" name="subject" type="text" placeholder="例：購入が反映されません / 不具合報告 / ご質問" required />
+
+            <label for="message">内容</label>
+            <textarea id="message" name="message" placeholder="発生したこと、発生手順、端末/iOS、スクショ有無など" required></textarea>
+
+            <div class="form-actions">
+              <button class="btn primary" type="submit">メールで送信する</button>
+              <span class="note">※ クリックするとメールアプリが開きます</span>
+            </div>
+          </form>
+
+          <script>
+            (function(){
+              // ★ここをあなたのメールアドレスに変更してください（上の表示と同じでOK）
+              const TO = "support@yourdomain.com";
+
+              const form = document.getElementById("supportForm");
+              form.addEventListener("submit", function(e){
+                e.preventDefault();
+
+                const name = document.getElementById("name").value.trim();
+                const email = document.getElementById("email").value.trim();
+                const subject = document.getElementById("subject").value.trim();
+                const message = document.getElementById("message").value.trim();
+
+                const lines = [];
+                lines.push("【SLIDOO お問い合わせ】");
+                lines.push("");
+                if(name) lines.push("お名前: " + name);
+                if(email) lines.push("返信先メール: " + email);
+                lines.push("");
+                lines.push("本文:");
+                lines.push(message);
+                lines.push("");
+                lines.push("----");
+                lines.push("端末(iPhone機種) / iOSバージョン / 発生手順 / スクショ有無 なども記載いただけると助かります。");
+
+                const body = encodeURIComponent(lines.join("\n"));
+                const subj = encodeURIComponent(subject);
+
+                window.location.href = `mailto:${TO}?subject=${subj}&body=${body}`;
+              });
+            })();
+          </script>
+
+          <p class="note" style="margin-top:12px;">
+            ※ 送信ボタンでメールが開かない場合は、上のメールアドレス宛に直接ご連絡ください。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div>© 2026 Prism Apps / SLIDOO</div>
+      <div class="footer-links">
+        <a href="#contact">サポート</a>
+        <a href="./privacy.html">プライバシーポリシー</a>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>

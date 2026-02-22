@@ -16,7 +16,7 @@
       --line: rgba(11,43,34,.12);
       --shadow: 0 18px 50px rgba(0,0,0,.18);
       --radius: 18px;
-      --max: 1040px;
+      --max: 1180px; /* ← 少し広げて全体を大きく見せる */
     }
 
     *{ box-sizing:border-box; }
@@ -134,12 +134,6 @@
       background: linear-gradient(135deg, rgba(255,183,3,.35), rgba(132,204,22,.28));
       box-shadow: 0 12px 30px rgba(0,0,0,.12);
     }
-    .mini{
-      color: rgba(11,43,34,.62);
-      font-size: 12px;
-      line-height: 1.7;
-      margin-top: 10px;
-    }
 
     /* 右：スマホ枠 */
     .phone{
@@ -189,15 +183,16 @@
       line-height: 1.6;
     }
 
-    /* sections */
-    section{ padding: 22px 0; }
+    /* sections（←余白を増やしてエリアを大きく） */
+    section{ padding: 36px 0; } /* 22px → 36px */
+
     .section-title{
       display:flex; align-items:baseline; gap: 12px;
-      margin: 0 0 12px;
+      margin: 0 0 16px;
     }
     .section-title h2{
       margin:0;
-      font-size: 20px;
+      font-size: 24px; /* 20px → 24px */
       letter-spacing: .04em;
     }
     .section-title span{
@@ -206,11 +201,11 @@
       letter-spacing: .18em;
     }
 
-    /* cards */
+    /* cards（特長） */
     .grid3{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
+      gap: 18px; /* 12px → 18px */
     }
     @media (max-width: 920px){
       .grid3{ grid-template-columns: 1fr; }
@@ -220,18 +215,18 @@
       border-radius: var(--radius);
       border: 1px solid rgba(11,43,34,.12);
       background: var(--panel);
-      padding: 16px;
+      padding: 22px; /* 16px → 22px */
       box-shadow: 0 10px 25px rgba(0,0,0,.08);
       display:flex;
-      gap: 12px;
+      gap: 16px; /* 12px → 16px */
       align-items:flex-start;
     }
 
-    /* 正方形サムネ（特長/遊び方で使い回し） */
+    /* 正方形サムネ（大きく） */
     .sq{
-      width: 72px;
-      height: 72px;
-      border-radius: 14px;
+      width: 92px;  /* 72px → 92px */
+      height: 92px; /* 72px → 92px */
+      border-radius: 16px;
       border: 1px solid rgba(11,43,34,.12);
       background: rgba(11,43,34,.06);
       overflow:hidden;
@@ -248,14 +243,23 @@
     }
 
     .card-body{ flex: 1 1 auto; }
-    .card h3{ margin: 0 0 8px; font-size: 16px; }
-    .card p{ margin: 0; color: var(--muted); line-height: 1.85; font-size: 14px; }
+    .card h3{
+      margin: 0 0 10px;
+      font-size: 18px; /* 16px → 18px */
+      line-height: 1.35;
+    }
+    .card p{
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.9;
+      font-size: 15px; /* 14px → 15px */
+    }
 
-    /* how to */
+    /* how to（遊び方） */
     .steps{
       display:grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
+      gap: 18px; /* 12px → 18px */
     }
     @media (max-width: 860px){
       .steps{ grid-template-columns: 1fr; }
@@ -265,24 +269,29 @@
       border-radius: var(--radius);
       border: 1px solid rgba(11,43,34,.12);
       background: var(--panel2);
-      padding: 16px;
+      padding: 22px; /* 16px → 22px */
       box-shadow: 0 10px 25px rgba(0,0,0,.06);
       display:flex;
-      gap: 12px;
+      gap: 16px; /* 12px → 16px */
       align-items:flex-start;
     }
     .step b{
       display:inline-block;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
       font-weight: 900;
+      font-size: 17px; /* 太字見出しを大きく */
+      line-height: 1.35;
     }
-    .step p{ margin: 0; color: var(--muted); line-height: 1.85; font-size: 14px; }
+    .step p{
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.9;
+      font-size: 15px; /* 14px → 15px */
+    }
     .step-body{ flex: 1 1 auto; }
 
     /* FAQ */
-    .faq{
-      display:grid; gap: 10px;
-    }
+    .faq{ display:grid; gap: 10px; }
     details{
       border-radius: 14px;
       border: 1px solid rgba(11,43,34,.12);
@@ -290,10 +299,7 @@
       padding: 12px 14px;
       box-shadow: 0 8px 18px rgba(0,0,0,.06);
     }
-    summary{
-      cursor:pointer;
-      font-weight: 900;
-    }
+    summary{ cursor:pointer; font-weight: 900; }
     details p{ margin: 10px 0 0; color: var(--muted); line-height: 1.85; }
 
     /* contact */

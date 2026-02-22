@@ -46,16 +46,18 @@
       display:flex; align-items:center; justify-content:space-between;
       padding: 12px 18px;
     }
+
+    /* ★ ヘッダー左：SLIDOOロゴに差し替え */
     .brand{
-      display:flex; gap:10px; align-items:center;
-      font-weight: 900; letter-spacing: .5px;
-      font-size: 16px;
+      display:flex;
+      align-items:center;
     }
-    .logo-dot{
-      width: 12px; height: 12px; border-radius: 999px;
-      background: linear-gradient(135deg, #ffb703, #84cc16);
-      box-shadow: 0 0 0 3px rgba(11,43,34,.08);
+    .brand-logo{
+      height: 34px;   /* ロゴの見た目サイズ（必要なら 40px などに） */
+      width: auto;
+      display:block;
     }
+
     .nav{
       display:flex; gap: 8px; align-items:center;
       font-size: 14px;
@@ -258,6 +260,7 @@
     @media (max-width: 520px){
       .sq{ width: 120px; height: 120px; }
       .card, .step{ padding: 22px; }
+      .brand-logo{ height: 30px; }
     }
     .sq img{
       width:100%;
@@ -393,10 +396,11 @@
 <body>
   <div class="top">
     <div class="wrap">
+      <!-- ★ Prism Apps → SLIDOOロゴに差し替え（Title_Top.png） -->
       <div class="brand">
-        <span class="logo-dot" aria-hidden="true"></span>
-        <span>Prism Apps</span>
+        <img src="Title_Top.png" alt="SLIDOO" class="brand-logo" />
       </div>
+
       <nav class="nav">
         <a href="#features">特長</a>
         <a href="#how">遊び方</a>
@@ -618,7 +622,6 @@
               });
             })();
           </script>
-          </p>
         </div>
       </div>
     </div>

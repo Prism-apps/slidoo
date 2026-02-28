@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>SLIDOO | パズル × ずかん</title>
   <meta name="description" content="SLIDOOは、スライドパズルで遊びながら、ずかんを集めて学べるカジュアルゲームです。" />
-
+<script type="text/javascript" id="_-s-js-_" src="//satori.segs.jp/s.js?c=99bccf4a"></script>
   <style>
     :root{
       --bg: #33CC99;
@@ -564,66 +564,9 @@
       <div class="section-title">
         <h2>お問い合わせ（サポート）</h2><span>SUPPORT</span>
       </div>
-
-      <div class="contact-grid">
-        <div class="box">
-          <h3>お問い合わせフォーム</h3>
-
-          <form id="supportForm">
-            <div class="form-row">
-              <div>
-                <label for="name">お名前（任意）</label>
-                <input id="name" name="name" type="text" placeholder="例：山田太郎" />
-              </div>
-              <div>
-                <label for="email">返信先メール（任意）</label>
-                <input id="email" name="email" type="email" placeholder="例：example@gmail.com" />
-              </div>
-            </div>
-
-            <label for="subject">件名</label>
-            <input id="subject" name="subject" type="text" placeholder="例：購入が反映されません / 不具合報告 / ご質問" required />
-
-            <label for="message">内容</label>
-            <textarea id="message" name="message" placeholder="発生したこと、発生手順、端末/iOS、スクショ有無など" required></textarea>
-
-            <div class="form-actions">
-              <button class="btn primary" type="submit">メールで送信する</button>
-              <span class="note">※ クリックするとメールアプリが開きます</span>
-            </div>
-          </form>
-
-          <script>
-            (function(){
-              const TO = "k71n916@yahoo.co.jp";
-              const form = document.getElementById("supportForm");
-              form.addEventListener("submit", function(e){
-                e.preventDefault();
-
-                const name = document.getElementById("name").value.trim();
-                const email = document.getElementById("email").value.trim();
-                const subject = document.getElementById("subject").value.trim();
-                const message = document.getElementById("message").value.trim();
-
-                const lines = [];
-                lines.push("【SLIDOO お問い合わせ】");
-                lines.push("");
-                if(name) lines.push("お名前: " + name);
-                if(email) lines.push("返信先メール: " + email);
-                lines.push("");
-                lines.push("本文:");
-                lines.push(message);
-                lines.push("");
-                lines.push("----");
-
-                const body = encodeURIComponent(lines.join("\n"));
-                const subj = encodeURIComponent(subject);
-
-                window.location.href = `mailto:${TO}?subject=${subj}&body=${body}`;
-              });
-            })();
-          </script>
-        </div>
+<div id="satori__creative_container">
+    <script id="-_-satori_creative-_-" src="//delivery.satr.jp/js/creative_set.js?d=20251119" data-key="a55ecccc4906f447"></script>
+</div>
       </div>
     </div>
   </section>
